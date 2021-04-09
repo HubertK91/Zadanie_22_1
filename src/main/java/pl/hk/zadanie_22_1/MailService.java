@@ -20,12 +20,12 @@ public class MailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendMail(Sender sender) {
-        logger.debug("Wysyłam maila do {}", sender.senderMail);
+    public void sendMail(SenderService sender, String username) {
+        logger.debug("Wysyłam maila do {}", username);
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
-            helper.setTo("hubert160491@gmail.com");
+            helper.setTo(username);
             helper.setFrom(sender.senderMail);
             helper.setSubject(sender.name);
             helper.setText(sender.content, true);
@@ -34,6 +34,6 @@ public class MailService {
             e.printStackTrace();
             logger.warn("Bład podczas wysłania wiadomości", e);
         }
-        logger.debug("Mail do {} wysłany poprawnie", sender.senderMail);
+        logger.debug("Mail do {} wysłany poprawnie", username);
     }
 }

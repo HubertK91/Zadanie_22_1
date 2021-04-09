@@ -1,13 +1,13 @@
 package pl.hk.zadanie_22_1;
 
-public class Sender {
+public class SenderService {
     String name;
     String senderMail;
     String content;
 
-    public Sender() {
+    public SenderService() {
     }
-    public Sender(String name, String senderMail, String content) {
+    public SenderService(String name, String senderMail, String content) {
         this.name = name;
         this.senderMail = senderMail;
         this.content = content;
