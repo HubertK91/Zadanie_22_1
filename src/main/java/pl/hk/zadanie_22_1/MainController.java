@@ -29,6 +29,6 @@ public class MainController {
     @PostMapping("/sent")
     public String sendMail(SenderService sender, @Value("${spring.mail.username}") String username) {
         mailService.sendMail(sender, username);
-        return "home";
+        return "result";
     }
 }

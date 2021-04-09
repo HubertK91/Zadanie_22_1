@@ -15,11 +15,12 @@
           th:object="${sender}">
         <div class="mb-3" style="max-width: 700px">
             <label for="name" class="form-label">Nazwa wysyłającego</label>
-            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nazwa">
+            <input type="text" th:field="*{name}" class="form-control" id="name"
+                   placeholder="Nazwa">
         </div>
         <div class="mb-3" style="max-width: 700px">
-            <label for="receiver" class="form-label">Email</label>
-            <input type="email" th:field="*{senderMail}" class="form-control" id="receiver" placeholder="Email">
+            <label for="sender" class="form-label">Email</label>
+            <input type="email" th:field="*{senderMail}" class="form-control" id="sender" placeholder="Email">
         </div>
         <div class="mb-3" style="max-width: 700px">
             <label for="content" class="form-label">Treść wiadomości</label>

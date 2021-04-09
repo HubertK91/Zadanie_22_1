@@ -27,7 +27,7 @@ public class MailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
             helper.setTo(username);
             helper.setFrom(sender.senderMail);
-            helper.setSubject(sender.name);
+            helper.setSubject("Wiadomość od " + sender.name + " z mailem " + sender.senderMail);
             helper.setText(sender.content, true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
