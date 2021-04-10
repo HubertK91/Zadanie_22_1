@@ -1,17 +1,9 @@
 package pl.hk.zadanie_22_1;
 
-public class SenderService {
-    String name;
-    String senderMail;
-    String content;
-
-    public SenderService() {
-    }
-    public SenderService(String name, String senderMail, String content) {
-        this.name = name;
-        this.senderMail = senderMail;
-        this.content = content;
-    }
+public class MailForm {
+    private String name;
+    private String senderMail;
+    private String content;
 
     public String getName() {
         return name;

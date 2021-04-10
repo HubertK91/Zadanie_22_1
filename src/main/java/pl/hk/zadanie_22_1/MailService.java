@@ -2,6 +2,7 @@ package pl.hk.zadanie_22_1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class MailService {
+    @Value("${spring.mail.username}")
+    private String siteOwner;
 
     private static final Logger logger = LoggerFactory.getLogger(MailService.class);
 
@@ -20,20 +23,21 @@ public class MailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendMail(SenderService sender, String username) {
-        logger.debug("Wysyłam maila do {}", username);
+    public void sendMail(MailForm sender) {
+        logger.debug("Wysyłam maila do {}", siteOwner);
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
-            helper.setTo(username);
-            helper.setFrom(sender.senderMail);
-            helper.setSubject("Wiadomość od " + sender.name + " z mailem " + sender.senderMail);
-            helper.setText(sender.content, true);
+            helper.setTo(siteOwner);
+            helper.setFrom(sender.getSenderMail());
+            helper.setSubject("Wiadomość od " + sender.getName() + " z mailem " + sender.getSenderMail());
+            helper.setText(sender.getContent(), true);
+            helper.setReplyTo(sender.getSenderMail());
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
             e.printStackTrace();
             logger.warn("Bład podczas wysłania wiadomości", e);
         }
-        logger.debug("Mail do {} wysłany poprawnie", username);
+        logger.debug("Mail do {} wysłany poprawnie", siteOwner);
     }
 }
